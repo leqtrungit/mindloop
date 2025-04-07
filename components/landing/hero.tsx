@@ -21,13 +21,13 @@ const Hero = () => {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="/auth/signup"
+              href="/sign-up"
               className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Get started
             </Link>
             <Link
-              href="/auth/login"
+              href="/sign-in"
               className="text-sm font-semibold leading-6 text-foreground"
             >
               Sign in <span aria-hidden="true">→</span>
