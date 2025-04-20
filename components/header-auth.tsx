@@ -1,40 +1,34 @@
 import { signOutAction } from "@/app/actions";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function AuthButton() {
+export default async function HeaderAuth() {
   const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  if (!user) return null;
 
-  if (!hasEnvVars) {
-    return (
-      <div className="flex gap-4 items-center">
-        <div>
-          <Badge
-            variant={"default"}
-            className="font-normal pointer-events-none"
-          >
-            Please update .env.local file with anon key and url
-          </Badge>
-        </div>
-      </div>
-    );
-  }
-
-  return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
-      <form action={signOutAction}>
-        <Button type="submit" variant={"outline"}>
-          Sign out
-        </Button>
-      </form>
-    </div>
-  ) : null;
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <form action={signOutAction}>
+            <Button type="submit" variant="ghost" size="icon">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </form>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Sign out</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
 }

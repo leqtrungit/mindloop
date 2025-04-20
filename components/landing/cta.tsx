@@ -1,44 +1,35 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-const CTA = () => {
+export default function CTA() {
+  const router = useRouter();
+
   return (
-    <div className="h-full w-full flex items-center justify-center">
-      <div className="mx-auto max-w-2xl px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+    <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        Start Your Journey of Insight
+      </h2>
+      <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl">
+        MindLoop helps you capture moments of insight in a simple and effective way. 
+        No need for lengthy writing, just record your important thoughts before they slip away.
+      </p>
+      <div className="mt-10 flex items-center gap-x-6">
+        <Button
+          size="lg"
+          onClick={() => router.push("/sign-up")}
         >
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            No distractions. No clutter.
-            <br />
-            Just thinking, made simple.
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
-            Start your journey to better thinking today.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link
-              href="/sign-up"
-              className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              Get started
-            </Link>
-            <Link
-              href="/sign-in"
-              className="text-sm font-semibold leading-6 text-foreground"
-            >
-              Sign in <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </motion.div>
+          Create Free Account
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => router.push("/sign-in")}
+        >
+          Sign In
+        </Button>
       </div>
     </div>
   );
-};
-
-export default CTA; 
+} 

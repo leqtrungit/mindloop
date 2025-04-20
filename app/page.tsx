@@ -1,21 +1,14 @@
-"use client";
+import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
+import LandingPage from "@/components/landing/landing-page"
 
-import Hero from "@/components/landing/hero";
-import Features from "@/components/landing/features";
-import CTA from "@/components/landing/cta";
+export default async function Home() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-export default function Home() {
-  return (
-    <div className="h-screen snap-y snap-mandatory overflow-y-auto">
-      <section className="h-screen snap-start">
-        <Hero />
-      </section>
-      <section className="h-screen snap-start">
-        <Features />
-      </section>
-      <section className="h-screen snap-start">
-        <CTA />
-      </section>
-    </div>
-  );
+  if (user) {
+    return redirect("/form")
+  }
+
+  return <LandingPage />
 }
