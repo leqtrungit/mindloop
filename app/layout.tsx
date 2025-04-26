@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "MindLoop - Capture Your Moments of Insight",
   description: "An application to quick capture your thoughs built with Next.js and Supabase",
+  manifest: '/manifest.json',
 };
 
 const geistSans = Geist({
@@ -37,10 +38,6 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="MindLoop" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
-        <link rel="apple-touch-startup-image" href="/apple-icon.png" />
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="bg-background text-foreground scroll-smooth">
         <ThemeProvider
