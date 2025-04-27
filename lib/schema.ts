@@ -8,9 +8,9 @@ export interface Moment {
   id: string
   user_id: string
   title: string
-  description: string
+  description?: string
   type: MomentType
-  tags: string[]
+  tags?: string[]
   impact: ImpactLevel
   source: SourceType
   time_of_day: TimeOfDay

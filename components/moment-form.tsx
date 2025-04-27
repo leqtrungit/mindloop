@@ -16,11 +16,13 @@ import { useToast } from '@/hooks/use-toast'
 import { Slider } from '@/components/ui/slider'
 import { createMoment } from '@/app/actions'
 import { Textarea } from '@/components/ui/textarea'
+import { TagsInput } from '@/components/tags-input'
+
 const formSchema = z.object({
   title: z.string().min(1, 'Vui lòng nhập tiêu đề'),
   description: z.string().optional(),
   type: z.enum(['learned', 'applied', 'reframed', 'connected']),
-  tags: z.string().optional(),
+  tags: z.array(z.string()).optional(),
   impact: z.enum(['LOW', 'MEDIUM', 'HIGH']),
   source: z.enum(['book', 'conversation', 'article', 'thinking', 'other']),
   time_of_day: z.enum(['morning', 'afternoon', 'evening'])
@@ -57,7 +59,11 @@ export function MomentForm() {
       setIsLoading(true)
       const formData = new FormData()
       Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value)
+        if (Array.isArray(value)) {
+          formData.append(key, value.join(','))
+        } else {
+          formData.append(key, value)
+        }
       })
 
       await createMoment(formData)
@@ -178,10 +184,9 @@ export function MomentForm() {
 
       <div className="space-y-2">
         <Label htmlFor="tags">{t('tags')}</Label>
-        <Input
-          id="tags"
-          placeholder={t('tagsPlaceholder')}
-          {...form.register('tags')}
+        <TagsInput
+          value={form.watch('tags') || []}
+          onChange={(tags) => form.setValue('tags', tags)}
         />
       </div>
 
