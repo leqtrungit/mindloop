@@ -1,12 +1,13 @@
 {
   "form": {
-    "title": "Tạo bài viết mới",
-    "description": "Chia sẻ suy nghĩ của bạn với cộng đồng",
-    "titlePlaceholder": "Tiêu đề bài viết",
-    "contentPlaceholder": "Nội dung bài viết...",
-    "submit": "Đăng bài",
+    "title": "Ghi nhận của tôi",
+    "description": "Suy ngẫm và ý tưởng của bạn",
+    "titlePlaceholder": "Bạn vừa nghĩ ra điều gì?",
+    "descriptionPlaceholder": "Ghi chú thêm về suy nghĩ của bạn...",
+    "submit": "Lưu",
+    "submitting": "Đang lưu...",
     "cancel": "Hủy",
-    "success": "Đăng bài thành công!",
+    "success": "Đã lưu thành công!",
     "error": "Có lỗi xảy ra, vui lòng thử lại",
     "language": "Ngôn ngữ",
     "type": "Loại ghi nhận",
@@ -19,6 +20,11 @@
     "tags": "Tags",
     "tagsPlaceholder": "Nhập tags, cách nhau bằng dấu phẩy",
     "impact": "Mức độ ảnh hưởng",
+    "impactLevels": {
+      "low": "Thấp",
+      "medium": "Trung bình",
+      "high": "Cao"
+    },
     "source": "Nguồn gốc",
     "sourcePlaceholder": "Chọn nguồn",
     "sources": {
@@ -33,7 +39,8 @@
       "morning": "Buổi sáng",
       "afternoon": "Buổi chiều",
       "evening": "Buổi tối"
-    }
+    },
+    "notes": "Ghi chú thêm"
   },
   "language": {
     "vi": "Tiếng Việt",

@@ -6,17 +6,22 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Slider } from '@/components/ui/slider'
-import { type MomentType, type SourceType, type TimeOfDay } from '@/lib/schema'
+import { type MomentType, type SourceType, type TimeOfDay, type ImpactLevel } from '@/lib/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/hooks/use-toast'
+import { Slider } from '@/components/ui/slider'
+import { createMoment } from '@/app/actions'
+import { Textarea } from '@/components/ui/textarea'
 const formSchema = z.object({
   title: z.string().min(1, 'Vui lòng nhập tiêu đề'),
+  description: z.string().optional(),
   type: z.enum(['learned', 'applied', 'reframed', 'connected']),
   tags: z.string().optional(),
-  impact_score: z.number().min(1).max(5).optional(),
+  impact: z.enum(['LOW', 'MEDIUM', 'HIGH']),
   source: z.enum(['book', 'conversation', 'article', 'thinking', 'other']),
   time_of_day: z.enum(['morning', 'afternoon', 'evening'])
 })
@@ -27,12 +32,16 @@ const timeOfDayOptions = ['morning', 'afternoon', 'evening'] as const
 
 export function MomentForm() {
   const t = useTranslations('form')
+  const router = useRouter()
+  const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       type: 'learned',
       source: 'thinking',
-      time_of_day: getTimeOfDay()
+      time_of_day: getTimeOfDay(),
+      impact: 'MEDIUM'
     }
   })
 
@@ -44,8 +53,29 @@ export function MomentForm() {
   }
 
   const onSubmit = async (data: FormData) => {
-    // TODO: Handle form submission
-    console.log(data)
+    try {
+      setIsLoading(true)
+      const formData = new FormData()
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value)
+      })
+
+      await createMoment(formData)
+      toast({
+        title: "Thành công",
+        description: "Đã lưu moment thành công",
+      })
+      router.refresh()
+      form.reset()
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Lỗi",
+        description: error instanceof Error ? error.message : 'Có lỗi xảy ra',
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -56,6 +86,16 @@ export function MomentForm() {
           id="title"
           placeholder={t('titlePlaceholder')}
           {...form.register('title')}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="description">{t('notes')}</Label>
+        <Textarea
+          id="description"
+          placeholder={t('descriptionPlaceholder')}
+          className="min-h-[100px]"
+          {...form.register('description')}
         />
       </div>
 
@@ -75,23 +115,30 @@ export function MomentForm() {
         </RadioGroup>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="tags">{t('tags')}</Label>
-        <Input
-          id="tags"
-          placeholder={t('tagsPlaceholder')}
-          {...form.register('tags')}
-        />
-      </div>
-
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Label>{t('impact')}</Label>
-        <Slider
-          defaultValue={[3]}
-          max={5}
-          step={1}
-          onValueChange={(value: number[]) => form.setValue('impact_score', value[0])}
-        />
+        <div className="relative">
+          <Slider
+            defaultValue={[1]}
+            min={0}
+            max={2}
+            step={1}
+            className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
+            onValueChange={(value: number[]) => {
+              const impactMap: Record<number, ImpactLevel> = {
+                0: 'LOW',
+                1: 'MEDIUM',
+                2: 'HIGH'
+              }
+              form.setValue('impact', impactMap[value[0]])
+            }}
+          />
+          <div className="absolute -bottom-6 left-0 right-0 flex justify-between px-2 text-xs text-muted-foreground">
+            <span>{t('impactLevels.low')}</span>
+            <span>{t('impactLevels.medium')}</span>
+            <span>{t('impactLevels.high')}</span>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-2">
@@ -129,8 +176,17 @@ export function MomentForm() {
         </RadioGroup>
       </div>
 
-      <Button type="submit" className="w-full">
-        {t('submit')}
+      <div className="space-y-2">
+        <Label htmlFor="tags">{t('tags')}</Label>
+        <Input
+          id="tags"
+          placeholder={t('tagsPlaceholder')}
+          {...form.register('tags')}
+        />
+      </div>
+
+      <Button type="submit" className="w-full" disabled={isLoading}>
+        {isLoading ? t('submitting') : t('submit')}
       </Button>
     </form>
   )

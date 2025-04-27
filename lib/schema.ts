@@ -1,3 +1,5 @@
+export type ImpactLevel = 'LOW' | 'MEDIUM' | 'HIGH'
+
 export type MomentType = 'learned' | 'applied' | 'reframed' | 'connected'
 export type SourceType = 'book' | 'conversation' | 'article' | 'thinking' | 'other'
 export type TimeOfDay = 'morning' | 'afternoon' | 'evening'
@@ -9,7 +11,7 @@ export interface Moment {
   description: string
   type: MomentType
   tags: string[]
-  impact_score: number | null
+  impact: ImpactLevel
   source: SourceType
   time_of_day: TimeOfDay
   created_at: string

@@ -4,6 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { type Moment } from "@/lib/schema";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -131,4 +132,31 @@ export const signOutAction = async () => {
   const supabase = await createClient();
   await supabase.auth.signOut();
   return redirect("/");
+};
+
+export const createMoment = async (formData: FormData) => {
+  const supabase = await createClient();
+  
+  const momentData = {
+    title: formData.get("title") as string,
+    description: formData.get("description") as string | null,
+    type: formData.get("type") as Moment["type"],
+    tags: formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || [],
+    impact: formData.get("impact") as Moment["impact"],
+    source: formData.get("source") as Moment["source"],
+    time_of_day: formData.get("time_of_day") as Moment["time_of_day"]
+  };
+
+  const { data, error } = await supabase
+    .from("moments")
+    .insert([momentData])
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Supabase error:", error);
+    throw new Error(error.message);
+  }
+
+  return data;
 };

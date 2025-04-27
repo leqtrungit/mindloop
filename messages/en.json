@@ -1,12 +1,13 @@
 {
   "form": {
-    "title": "Create New Post",
-    "description": "Share your thoughts with the community",
-    "titlePlaceholder": "What did you just realize?",
-    "contentPlaceholder": "Content of your post...",
+    "title": "My Moment",
+    "description": "Your reflection and ideas",
+    "titlePlaceholder": "What just came to your mind?",
+    "descriptionPlaceholder": "Add more notes about your thoughts...",
     "submit": "Save",
+    "submitting": "Saving...",
     "cancel": "Cancel",
-    "success": "Post created successfully!",
+    "success": "Saved successfully!",
     "error": "An error occurred, please try again",
     "language": "Language",
     "type": "Moment Type",
@@ -19,6 +20,11 @@
     "tags": "Tags",
     "tagsPlaceholder": "Enter tags, separated by commas",
     "impact": "Impact Level",
+    "impactLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
     "source": "Source",
     "sourcePlaceholder": "Select source",
     "sources": {
@@ -33,7 +39,8 @@
       "morning": "Morning",
       "afternoon": "Afternoon",
       "evening": "Evening"
-    }
+    },
+    "notes": "Additional Notes"
   },
   "language": {
     "vi": "Vietnamese",
