@@ -1,7 +1,6 @@
 import HeaderAuth from "@/components/header-auth";
 import { Logo } from "@/components/logo";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
@@ -10,6 +9,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale } from 'next-intl/server';
 import { Toaster } from "@/components/ui/toaster";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { Inter } from "next/font/google";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -22,9 +22,12 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-const geistSans = Geist({
+const inter = Inter({
   display: "swap",
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
+  fallback: ["system-ui", "sans-serif"],
+  preload: true,
+  adjustFontFallback: true,
 });
 
 export default async function RootLayout({
@@ -36,7 +39,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={geistSans.className} suppressHydrationWarning>
+    <html lang={locale} className={inter.className} suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
