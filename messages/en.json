@@ -1,0 +1,43 @@
+{
+  "form": {
+    "title": "Create New Post",
+    "description": "Share your thoughts with the community",
+    "titlePlaceholder": "What did you just realize?",
+    "contentPlaceholder": "Content of your post...",
+    "submit": "Save",
+    "cancel": "Cancel",
+    "success": "Post created successfully!",
+    "error": "An error occurred, please try again",
+    "language": "Language",
+    "type": "Moment Type",
+    "types": {
+      "learned": "Learned",
+      "applied": "Applied",
+      "reframed": "Reframed",
+      "connected": "Connected"
+    },
+    "tags": "Tags",
+    "tagsPlaceholder": "Enter tags, separated by commas",
+    "impact": "Impact Level",
+    "source": "Source",
+    "sourcePlaceholder": "Select source",
+    "sources": {
+      "book": "Book",
+      "conversation": "Conversation",
+      "article": "Article",
+      "thinking": "Thinking",
+      "other": "Other"
+    },
+    "timeOfDayLabel": "Time of Day",
+    "timeOfDayOptions": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    }
+  },
+  "language": {
+    "vi": "Vietnamese",
+    "en": "English",
+    "switch": "Switch language"
+  }
+} 

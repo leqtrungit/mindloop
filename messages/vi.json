@@ -1,0 +1,43 @@
+{
+  "form": {
+    "title": "Tạo bài viết mới",
+    "description": "Chia sẻ suy nghĩ của bạn với cộng đồng",
+    "titlePlaceholder": "Tiêu đề bài viết",
+    "contentPlaceholder": "Nội dung bài viết...",
+    "submit": "Đăng bài",
+    "cancel": "Hủy",
+    "success": "Đăng bài thành công!",
+    "error": "Có lỗi xảy ra, vui lòng thử lại",
+    "language": "Ngôn ngữ",
+    "type": "Loại ghi nhận",
+    "types": {
+      "learned": "Học được",
+      "applied": "Áp dụng",
+      "reframed": "Suy ngẫm",
+      "connected": "Kết nối"
+    },
+    "tags": "Tags",
+    "tagsPlaceholder": "Nhập tags, cách nhau bằng dấu phẩy",
+    "impact": "Mức độ ảnh hưởng",
+    "source": "Nguồn gốc",
+    "sourcePlaceholder": "Chọn nguồn",
+    "sources": {
+      "book": "Sách",
+      "conversation": "Trò chuyện",
+      "article": "Bài viết",
+      "thinking": "Suy nghĩ",
+      "other": "Khác"
+    },
+    "timeOfDayLabel": "Thời điểm trong ngày",
+    "timeOfDayOptions": {
+      "morning": "Buổi sáng",
+      "afternoon": "Buổi chiều",
+      "evening": "Buổi tối"
+    }
+  },
+  "language": {
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh",
+    "switch": "Chuyển đổi ngôn ngữ"
+  }
+} 

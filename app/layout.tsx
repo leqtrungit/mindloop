@@ -4,9 +4,12 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
-import { createClient } from "@/utils/supabase/server";
 import "./globals.css";
 import { Metadata } from "next";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getLocale } from 'next-intl/server';
+import { Toaster } from "@/components/ui/toaster";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -29,11 +32,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
+    <html lang={locale} className={geistSans.className} suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -46,35 +49,39 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col">
-            <nav className="w-full border-b border-b-foreground/10 h-16 fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm z-50">
-              <div className="w-full max-w-7xl mx-auto flex justify-between items-center p-3 px-5 text-sm">
-                <div className="flex gap-5 items-center">
-                  <Link 
-                    href="/" 
-                    className="flex items-center gap-2"
-                  >
-                    <Logo width={24} height={24} />
-                    <span className="font-semibold text-lg">MindLoop</span>
-                  </Link>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <main className="min-h-screen flex flex-col">
+              <nav className="w-full border-b border-b-foreground/10 h-16 fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm z-50">
+                <div className="w-full max-w-7xl mx-auto flex justify-between items-center p-3 px-5 text-sm">
+                  <div className="flex gap-5 items-center">
+                    <Link 
+                      href="/" 
+                      className="flex items-center gap-2"
+                    >
+                      <Logo width={24} height={24} />
+                      <span className="font-semibold text-lg">MindLoop</span>
+                    </Link>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <HeaderAuth />
+                    <ThemeSwitcher />
+                    <LanguageSwitcher />
+                  </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <HeaderAuth />
-                  <ThemeSwitcher />
-                </div>
+              </nav>
+              
+              <div className="flex-1 w-full">
+                {children}
               </div>
-            </nav>
-            
-            <div className="flex-1 w-full">
-              {children}
-            </div>
 
-            <footer className="w-full border-t border-t-foreground/10 py-8">
-              <div className="w-full max-w-7xl mx-auto px-4 text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} MindLoop. All rights reserved.</p>
-              </div>
-            </footer>
-          </main>
+              <footer className="w-full border-t border-t-foreground/10 py-8">
+                <div className="w-full max-w-7xl mx-auto px-4 text-center text-sm text-muted-foreground">
+                  <p>© {new Date().getFullYear()} MindLoop. All rights reserved.</p>
+                </div>
+              </footer>
+            </main>
+          </NextIntlClientProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

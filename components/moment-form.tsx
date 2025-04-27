@@ -1,12 +1,13 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
-import { momentTypes, sources, timeOfDay, type MomentType, type SourceType, type TimeOfDay } from '@/lib/schema'
+import { type MomentType, type SourceType, type TimeOfDay } from '@/lib/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -22,7 +23,10 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
+const timeOfDayOptions = ['morning', 'afternoon', 'evening'] as const
+
 export function MomentForm() {
+  const t = useTranslations('form')
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,22 +51,22 @@ export function MomentForm() {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
       <div className="space-y-2">
-        <Label htmlFor="title">Tiêu đề</Label>
+        <Label htmlFor="title">{t('title')}</Label>
         <Input
           id="title"
-          placeholder="Vừa nhận ra điều gì?"
+          placeholder={t('titlePlaceholder')}
           {...form.register('title')}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>Loại ghi nhận</Label>
+        <Label>{t('type')}</Label>
         <RadioGroup
           defaultValue="learned"
           className="grid grid-cols-2 gap-2"
           onValueChange={(value: string) => form.setValue('type', value as MomentType)}
         >
-          {Object.entries(momentTypes).map(([value, label]) => (
+          {Object.entries(t.raw('types') as Record<string, string>).map(([value, label]) => (
             <div key={value} className="flex items-center space-x-2">
               <RadioGroupItem value={value} id={value} />
               <Label htmlFor={value}>{label}</Label>
@@ -72,16 +76,16 @@ export function MomentForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="tags">Tags (tùy chọn)</Label>
+        <Label htmlFor="tags">{t('tags')}</Label>
         <Input
           id="tags"
-          placeholder="Nhập tags, cách nhau bằng dấu phẩy"
+          placeholder={t('tagsPlaceholder')}
           {...form.register('tags')}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>Mức độ ảnh hưởng (tùy chọn)</Label>
+        <Label>{t('impact')}</Label>
         <Slider
           defaultValue={[3]}
           max={5}
@@ -91,16 +95,16 @@ export function MomentForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="source">Nguồn gốc</Label>
+        <Label htmlFor="source">{t('source')}</Label>
         <Select
           defaultValue="thinking"
           onValueChange={(value: string) => form.setValue('source', value as SourceType)}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Chọn nguồn" />
+            <SelectValue placeholder={t('sourcePlaceholder')} />
           </SelectTrigger>
           <SelectContent>
-            {Object.entries(sources).map(([value, label]) => (
+            {Object.entries(t.raw('sources') as Record<string, string>).map(([value, label]) => (
               <SelectItem key={value} value={value}>
                 {label}
               </SelectItem>
@@ -110,23 +114,23 @@ export function MomentForm() {
       </div>
 
       <div className="space-y-2">
-        <Label>Thời điểm trong ngày</Label>
+        <Label>{t('timeOfDayLabel')}</Label>
         <RadioGroup
           defaultValue={getTimeOfDay()}
           className="grid grid-cols-3 gap-2"
           onValueChange={(value: string) => form.setValue('time_of_day', value as TimeOfDay)}
         >
-          {Object.entries(timeOfDay).map(([value, label]) => (
+          {timeOfDayOptions.map((value) => (
             <div key={value} className="flex items-center space-x-2">
               <RadioGroupItem value={value} id={value} />
-              <Label htmlFor={value}>{label}</Label>
+              <Label htmlFor={value}>{t(`timeOfDayOptions.${value}`)}</Label>
             </div>
           ))}
         </RadioGroup>
       </div>
 
       <Button type="submit" className="w-full">
-        Ghi lại
+        {t('submit')}
       </Button>
     </form>
   )
