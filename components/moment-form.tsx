@@ -68,16 +68,16 @@ export function MomentForm() {
 
       await createMoment(formData)
       toast({
-        title: "Thành công",
-        description: "Đã lưu moment thành công",
+        title: t('successTitle'),
+        description: t('successDescription'),
       })
       router.refresh()
       form.reset()
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Lỗi",
-        description: error instanceof Error ? error.message : 'Có lỗi xảy ra',
+        title: t('errorTitle'),
+        description: error instanceof Error ? error.message : t('errorDescription'),
       })
     } finally {
       setIsLoading(false)
@@ -187,6 +187,7 @@ export function MomentForm() {
         <TagsInput
           value={form.watch('tags') || []}
           onChange={(tags) => form.setValue('tags', tags)}
+          placeholder={t('tagsPlaceholder')}
         />
       </div>
 

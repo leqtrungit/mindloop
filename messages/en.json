@@ -18,7 +18,7 @@
       "connected": "Connected"
     },
     "tags": "Tags",
-    "tagsPlaceholder": "Enter tags, separated by commas",
+    "tagsPlaceholder": "Enter tag and press Enter or comma",
     "impact": "Impact Level",
     "impactLevels": {
       "low": "Low",
@@ -40,7 +40,11 @@
       "afternoon": "Afternoon",
       "evening": "Evening"
     },
-    "notes": "Additional Notes"
+    "notes": "Additional Notes",
+    "successTitle": "Success",
+    "successDescription": "Moment saved successfully",
+    "errorTitle": "Error",
+    "errorDescription": "An error occurred, please try again"
   },
   "language": {
     "vi": "Vietnamese",

@@ -18,7 +18,7 @@
       "connected": "Kết nối"
     },
     "tags": "Tags",
-    "tagsPlaceholder": "Nhập tags, cách nhau bằng dấu phẩy",
+    "tagsPlaceholder": "Nhập tag và nhấn Enter hoặc dấu phẩy",
     "impact": "Mức độ ảnh hưởng",
     "impactLevels": {
       "low": "Thấp",
@@ -36,11 +36,15 @@
     },
     "timeOfDayLabel": "Thời điểm trong ngày",
     "timeOfDayOptions": {
-      "morning": "Buổi sáng",
-      "afternoon": "Buổi chiều",
-      "evening": "Buổi tối"
+      "morning": "Sáng",
+      "afternoon": "Chiều",
+      "evening": "Tối"
     },
-    "notes": "Ghi chú thêm"
+    "notes": "Ghi chú thêm",
+    "successTitle": "Thành công",
+    "successDescription": "Đã lưu moment thành công",
+    "errorTitle": "Lỗi",
+    "errorDescription": "Có lỗi xảy ra, vui lòng thử lại"
   },
   "language": {
     "vi": "Tiếng Việt",

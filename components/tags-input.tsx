@@ -5,15 +5,18 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
-interface TagsInputProps {
+export interface TagsInputProps {
   value: string[]
   onChange: (tags: string[]) => void
+  placeholder?: string
   className?: string
 }
 
-export function TagsInput({ value, onChange, className }: TagsInputProps) {
+export function TagsInput({ value, onChange, placeholder, className }: TagsInputProps) {
   const [inputValue, setInputValue] = React.useState('')
+  const t = useTranslations()
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' || e.key === ',') {
@@ -50,7 +53,7 @@ export function TagsInput({ value, onChange, className }: TagsInputProps) {
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Nhập tag và nhấn Enter hoặc dấu phẩy"
+        placeholder={placeholder || t('tagsPlaceholder')}
         className="flex-1 border-0 p-0 focus-visible:ring-0"
       />
     </div>
