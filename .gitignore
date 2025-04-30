@@ -41,3 +41,10 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+
+# next-pwa / Workbox output
+/public/sw.js
+/public/workbox-*.js
+/public/worker-*.js
+/public/manifest-*.js
+/public/_next/static/workbox-*.js
