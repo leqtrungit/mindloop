@@ -44,9 +44,9 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    // Nếu đã đăng nhập và truy cập trang sign-in, redirect về dashboard
+    // Nếu đã đăng nhập và truy cập trang sign-in, redirect về form
     if (request.nextUrl.pathname === "/sign-in" && !user.error) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+      return NextResponse.redirect(new URL("/form", request.url));
     }
 
     return response;
