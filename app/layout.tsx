@@ -10,7 +10,6 @@ import { getMessages, getLocale } from 'next-intl/server';
 import { Toaster } from "@/components/ui/toaster";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Inter } from "next/font/google";
-import { Footer } from "@/components/landing/footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -77,8 +76,6 @@ export default async function RootLayout({
               <div className="flex-1 w-full">
                 {children}
               </div>
-
-              <Footer />
             </main>
           </NextIntlClientProvider>
           <Toaster />

@@ -94,5 +94,48 @@
       "submit": "Đặt lại mật khẩu",
       "submitting": "Đang đặt lại mật khẩu..."
     }
+  },
+  "landing": {
+    "hero": {
+      "title": "Ý tưởng tới đâu, MindLoop tới đó.",
+      "subtitle": "Từ suy nghĩ đến tri thức có cấu trúc",
+      "cta": "Bắt đầu ghi chép"
+    },
+    "problem": {
+      "title": "Ý tưởng chỉ có giá trị khi được nắm giữ kịp thời",
+      "problem": {
+        "title": "Vấn đề",
+        "description": "Khoảnh khắc \"aha!\" đến rồi đi trong vài giây. Các app ghi chú truyền thống với quy trình phức tạp khiến bạn bỏ lỡ những ý tưởng quý giá."
+      },
+      "solution": {
+        "title": "Giải pháp",
+        "description": "MindLoop rút gọn toàn bộ quy trình xuống dưới 5 giây - là lưới an toàn giữa bộ não và quên lãng."
+      }
+    },
+    "features": {
+      "title": "Thiết kế cho tốc độ của suy nghĩ",
+      "quickCapture": {
+        "title": "Ghi chép nhanh",
+        "description": "Một form đơn giản để ghi lại suy nghĩ ngay lập tức. Chỉ cần nhập nội dung chính, không cần format hay chỉnh sửa phức tạp."
+      },
+      "smartTags": {
+        "title": "Phân loại thông minh",
+        "description": "4 loại ghi nhận: Học được, Áp dụng, Suy ngẫm, và Kết nối. Giúp bạn phân loại ý tưởng một cách có hệ thống."
+      },
+      "autoTimestamp": {
+        "title": "Theo dõi thời gian",
+        "description": "Tự động ghi nhận thời điểm trong ngày (Sáng, Chiều, Tối) để bạn hiểu rõ nhịp điệu sáng tạo của bản thân."
+      },
+      "impactSlider": {
+        "title": "Đánh giá tác động",
+        "description": "Thang đo đơn giản 3 mức (Thấp, Trung bình, Cao) giúp bạn đánh giá mức độ quan trọng của mỗi ghi nhận."
+      }
+    },
+    "cta": {
+      "title": "Bắt đầu vòng lặp của bạn",
+      "description": "Biến dòng suy nghĩ rời rạc thành cơ sở dữ liệu cá nhân có thể truy vấn, đo lường và gợi ý hành động.",
+      "primary": "Tạo tài khoản miễn phí",
+      "secondary": "Đăng nhập"
+    }
   }
 } 

@@ -94,5 +94,48 @@
       "submit": "Reset Password",
       "submitting": "Resetting password..."
     }
+  },
+  "landing": {
+    "hero": {
+      "title": "Where your thoughts go, MindLoop follows.",
+      "subtitle": "Speed of thought → Structure of knowledge",
+      "cta": "Start Capturing"
+    },
+    "problem": {
+      "title": "Ideas are only valuable when captured in time",
+      "problem": {
+        "title": "Problem",
+        "description": "The \"aha!\" moment comes and goes in seconds. Traditional note-taking apps with complex workflows make you miss precious ideas."
+      },
+      "solution": {
+        "title": "Solution",
+        "description": "MindLoop simplifies the entire process to under 5 seconds - a safety net between your brain and forgetfulness."
+      }
+    },
+    "features": {
+      "title": "Designed for the speed of thought",
+      "quickCapture": {
+        "title": "Quick Capture",
+        "description": "A simple form to capture your thoughts instantly. Just enter the main content, no complex formatting or editing required."
+      },
+      "smartTags": {
+        "title": "Smart Categorization",
+        "description": "4 types of moments: Learned, Applied, Reframed, and Connected. Help you categorize ideas systematically."
+      },
+      "autoTimestamp": {
+        "title": "Time Tracking",
+        "description": "Automatically record time of day (Morning, Afternoon, Evening) to understand your creative rhythm."
+      },
+      "impactSlider": {
+        "title": "Impact Rating",
+        "description": "Simple 3-level scale (Low, Medium, High) helps you assess the importance of each moment."
+      }
+    },
+    "cta": {
+      "title": "Start Your Loop",
+      "description": "Turn scattered thoughts into a queryable, measurable, and actionable personal database.",
+      "primary": "Create Free Account",
+      "secondary": "Sign In"
+    }
   }
 } 
