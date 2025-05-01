@@ -10,6 +10,7 @@ import { getMessages, getLocale } from 'next-intl/server';
 import { Toaster } from "@/components/ui/toaster";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Inter } from "next/font/google";
+import { Footer } from "@/components/landing/footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -77,11 +78,7 @@ export default async function RootLayout({
                 {children}
               </div>
 
-              <footer className="w-full border-t border-t-foreground/10 py-8">
-                <div className="w-full max-w-7xl mx-auto px-4 text-center text-sm text-muted-foreground">
-                  <p>© {new Date().getFullYear()} MindLoop. All rights reserved.</p>
-                </div>
-              </footer>
+              <Footer />
             </main>
           </NextIntlClientProvider>
           <Toaster />
