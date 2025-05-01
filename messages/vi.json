@@ -50,5 +50,49 @@
     "vi": "Tiếng Việt",
     "en": "Tiếng Anh",
     "switch": "Chuyển đổi ngôn ngữ"
+  },
+  "auth": {
+    "signUp": {
+      "title": "Đăng ký",
+      "description": "Đã có tài khoản?",
+      "signInLink": "Đăng nhập",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Mật khẩu",
+      "passwordPlaceholder": "Mật khẩu của bạn",
+      "submit": "Đăng ký",
+      "submitting": "Đang đăng ký..."
+    },
+    "signIn": {
+      "title": "Đăng nhập",
+      "description": "Chưa có tài khoản?",
+      "signUpLink": "Đăng ký",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Mật khẩu",
+      "passwordPlaceholder": "Mật khẩu của bạn",
+      "forgotPassword": "Quên mật khẩu?",
+      "submit": "Đăng nhập",
+      "submitting": "Đang đăng nhập..."
+    },
+    "forgotPassword": {
+      "title": "Quên mật khẩu",
+      "description": "Đã có tài khoản?",
+      "signInLink": "Đăng nhập",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Gửi link đặt lại",
+      "submitting": "Đang gửi link đặt lại..."
+    },
+    "resetPassword": {
+      "title": "Đặt lại mật khẩu",
+      "description": "Vui lòng nhập mật khẩu mới của bạn bên dưới.",
+      "newPassword": "Mật khẩu mới",
+      "newPasswordPlaceholder": "Nhập mật khẩu mới",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "confirmPasswordPlaceholder": "Xác nhận mật khẩu mới",
+      "submit": "Đặt lại mật khẩu",
+      "submitting": "Đang đặt lại mật khẩu..."
+    }
   }
 } 
