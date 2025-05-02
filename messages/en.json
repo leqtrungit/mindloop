@@ -137,5 +137,15 @@
       "primary": "Create Free Account",
       "secondary": "Sign In"
     }
+  },
+  "moments": {
+    "title": "Read Moments",
+    "description": "Review and reflect on your moments",
+    "createButton": "Create moment",
+    "emptyState": "You don't have any moments yet. Create your first one!",
+    "error": {
+      "title": "An error occurred",
+      "description": "Could not load moments. Please try again later."
+    }
   }
 } 

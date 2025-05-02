@@ -10,6 +10,7 @@ import { getMessages, getLocale } from 'next-intl/server';
 import { Toaster } from "@/components/ui/toaster";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Inter } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -52,33 +53,35 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <main className="min-h-screen flex flex-col">
-              <nav className="w-full border-b border-b-foreground/10 h-16 fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm z-50">
-                <div className="w-full max-w-7xl mx-auto flex justify-between items-center p-3 px-5 text-sm">
-                  <div className="flex gap-5 items-center">
-                    <Link 
-                      href="/" 
-                      className="flex items-center gap-2"
-                    >
-                      <Logo width={24} height={24} />
-                      <span className="font-semibold text-lg">MindLoop</span>
-                    </Link>
+          <TooltipProvider delayDuration={300}>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <main className="min-h-screen flex flex-col">
+                <nav className="w-full border-b border-b-foreground/10 h-16 fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm z-50">
+                  <div className="w-full max-w-7xl mx-auto flex justify-between items-center p-3 px-5 text-sm">
+                    <div className="flex gap-5 items-center">
+                      <Link 
+                        href="/" 
+                        className="flex items-center gap-2"
+                      >
+                        <Logo width={24} height={24} />
+                        <span className="font-semibold text-lg">MindLoop</span>
+                      </Link>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <HeaderAuth />
+                      <ThemeSwitcher />
+                      <LanguageSwitcher />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <HeaderAuth />
-                    <ThemeSwitcher />
-                    <LanguageSwitcher />
-                  </div>
+                </nav>
+                
+                <div className="flex-1 w-full">
+                  {children}
                 </div>
-              </nav>
-              
-              <div className="flex-1 w-full">
-                {children}
-              </div>
-            </main>
-          </NextIntlClientProvider>
-          <Toaster />
+              </main>
+            </NextIntlClientProvider>
+            <Toaster />
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

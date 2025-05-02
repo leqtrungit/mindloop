@@ -137,5 +137,15 @@
       "primary": "Tạo tài khoản miễn phí",
       "secondary": "Đăng nhập"
     }
+  },
+  "moments": {
+    "title": "Đọc Moments",
+    "description": "Xem lại và phản tư về các khoảnh khắc của bạn",
+    "createButton": "Tạo moment",
+    "emptyState": "Bạn chưa có moment nào. Hãy tạo moment đầu tiên của bạn!",
+    "error": {
+      "title": "Đã có lỗi xảy ra",
+      "description": "Không thể tải danh sách moments. Vui lòng thử lại sau."
+    }
   }
 } 
