@@ -28,7 +28,7 @@ export default async function ReadMomentsPage() {
   if (error) {
     console.error("Error fetching moments:", error)
     return (
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold">{t("error.title")}</h1>
         <p className="text-muted-foreground">
           {t("error.description")}
@@ -38,14 +38,8 @@ export default async function ReadMomentsPage() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
-      <div className="mb-8 flex items-center justify-between">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold">{t("title")}</h1>
-          <p className="text-muted-foreground">
-            {t("description")}
-          </p>
-        </div>
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div className="hidden md:flex justify-end">
         <Button asChild>
           <Link href="/form" className="flex items-center gap-2">
             <Plus className="h-4 w-4" />

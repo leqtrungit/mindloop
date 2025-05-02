@@ -10,6 +10,7 @@
     "success": "Saved successfully!",
     "error": "An error occurred, please try again",
     "language": "Language",
+    "backToList": "Back to list",
     "type": "Moment Type",
     "types": {
       "learned": "Learned",

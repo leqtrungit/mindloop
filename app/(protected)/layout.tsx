@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
+import { MobileNav } from "@/components/mobile-nav"
 
 export default async function ProtectedLayout({
   children,
@@ -16,5 +17,10 @@ export default async function ProtectedLayout({
     return redirect("/sign-in")
   }
 
-  return <>{children}</>
+  return (
+    <div className="flex-1 w-full pt-16 pb-16 md:pb-0">
+      {children}
+      <MobileNav />
+    </div>
+  )
 } 

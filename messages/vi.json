@@ -10,6 +10,7 @@
     "success": "Đã lưu thành công!",
     "error": "Có lỗi xảy ra, vui lòng thử lại",
     "language": "Ngôn ngữ",
+    "backToList": "Quay lại danh sách",
     "type": "Loại ghi nhận",
     "types": {
       "learned": "Học được",
