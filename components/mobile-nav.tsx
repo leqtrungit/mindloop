@@ -44,10 +44,10 @@ export function MobileNav() {
       active: pathname === "/moments",
     },
     {
-      href: "/form",
+      href: "/moments/new",
       icon: Plus,
       label: t("moments.createButton"),
-      active: pathname === "/form",
+      active: pathname === "/moments/new",
     },
   ]
 

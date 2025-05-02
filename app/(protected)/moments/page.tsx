@@ -41,7 +41,7 @@ export default async function ReadMomentsPage() {
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <div className="hidden md:flex justify-end">
         <Button asChild>
-          <Link href="/form" className="flex items-center gap-2">
+          <Link href="/moments/new" className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
             {t("createButton")}
           </Link>
