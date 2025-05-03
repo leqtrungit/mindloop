@@ -7,8 +7,9 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
-import { Clock, Book, MessageSquare, Newspaper, Brain, Link, Tag, GraduationCap, Hammer, RefreshCw, Users } from "lucide-react"
-import { type Moment } from "@/lib/schema"
+import { Clock, Book, MessageSquare, Newspaper, Brain, Link, Tag, GraduationCap, Hammer, RefreshCw, Users, LucideIcon } from "lucide-react"
+import { type Moment } from "@/utils/supabase/supabase"
+import { MomentType, SourceType, isValidMomentType, isValidSourceType } from "@/lib/types"
 
 interface MomentCardProps {
   moment: Moment
@@ -25,7 +26,7 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
     HIGH: "bg-red-100 text-red-800",
   }
 
-  const sourceIcons = {
+  const sourceIcons: Record<SourceType, LucideIcon> = {
     book: Book,
     conversation: MessageSquare,
     article: Newspaper,
@@ -33,15 +34,22 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
     other: Link
   }
 
-  const typeIcons = {
+  const typeIcons: Record<MomentType, LucideIcon> = {
     learned: GraduationCap,
     applied: Hammer,
     reframed: RefreshCw,
     connected: Users
   }
 
-  const SourceIcon = moment.source ? sourceIcons[moment.source] : null
-  const TypeIcon = moment.type ? typeIcons[moment.type] : null
+  let SourceIcon: LucideIcon | null = null;
+  if (moment.source && isValidSourceType(moment.source)) {
+    SourceIcon = sourceIcons[moment.source];
+  }
+
+  let TypeIcon: LucideIcon | null = null;
+  if (moment.type && isValidMomentType(moment.type)) {
+    TypeIcon = typeIcons[moment.type];
+  }
 
   return (
     <Card className="group relative h-full transition-all hover:shadow-lg">
@@ -84,13 +92,13 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
           ))}
         </div>
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
-          {SourceIcon && (
+          {SourceIcon && moment.source && isValidSourceType(moment.source) && (
             <div className="flex items-center gap-1">
               <SourceIcon className="h-3 w-3" />
               <span>{(t.raw('sources') as Record<string, string>)[moment.source]}</span>
             </div>
           )}
-          {TypeIcon && (
+          {TypeIcon && moment.type && isValidMomentType(moment.type) && (
             <div className="flex items-center gap-1">
               <TypeIcon className="h-3 w-3" />
               <span>{(t.raw('types') as Record<string, string>)[moment.type]}</span>

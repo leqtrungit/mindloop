@@ -3,8 +3,8 @@
 import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { type Moment } from "@/lib/schema";
-
+import { type Moment, type MomentInsert, ImpactLevel } from "@/utils/supabase/supabase";
+import { isValidImpactLevel, isValidMomentType, isValidSourceType, isValidTimeOfDay } from "@/lib/types";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -136,14 +136,41 @@ export const signOutAction = async () => {
 export const createMoment = async (formData: FormData) => {
   const supabase = await createClient();
   
-  const momentData = {
-    title: formData.get("title") as string,
-    description: formData.get("description") as string | null,
-    type: formData.get("type") as Moment["type"],
-    tags: formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || [],
-    impact: formData.get("impact") as Moment["impact"],
-    source: formData.get("source") as Moment["source"],
-    time_of_day: formData.get("time_of_day") as Moment["time_of_day"]
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string | null;
+  const type = formData.get("type") as string;
+  const tags = formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || null;
+  const impactValue = formData.get("impact") as string;
+  const source = formData.get("source") as string | null;
+  const time_of_day = formData.get("time_of_day") as string | null;
+  
+  // Validate inputs
+  if (!isValidMomentType(type)) {
+    throw new Error("Invalid moment type");
+  }
+  
+  if (!isValidImpactLevel(impactValue)) {
+    throw new Error("Invalid impact level");
+  }
+  
+  const impact = impactValue as ImpactLevel;
+  
+  if (source && !isValidSourceType(source)) {
+    throw new Error("Invalid source type");
+  }
+  
+  if (time_of_day && !isValidTimeOfDay(time_of_day)) {
+    throw new Error("Invalid time of day");
+  }
+  
+  const momentData: MomentInsert = {
+    title,
+    description,
+    type,
+    tags,
+    impact,
+    source,
+    time_of_day
   };
 
   const { data, error } = await supabase
@@ -157,5 +184,5 @@ export const createMoment = async (formData: FormData) => {
     throw new Error(error.message);
   }
 
-  return data;
+  return data as Moment;
 };

@@ -3,7 +3,7 @@
 import { MomentCard } from "./moment-card"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
-import { type Moment } from "@/lib/schema"
+import { type Moment } from "@/utils/supabase/supabase"
 
 interface MomentsGridProps {
   moments: Moment[]

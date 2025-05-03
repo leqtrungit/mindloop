@@ -1,7 +1,7 @@
 import { MomentsGrid } from "@/components/moments/moments-grid"
 import { createClient } from "@/utils/supabase/server"
 import { Metadata } from "next"
-import { type Moment } from "@/lib/schema"
+import { type Moment } from "@/utils/supabase/supabase"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import Link from "next/link"
