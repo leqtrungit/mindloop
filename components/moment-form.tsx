@@ -100,8 +100,7 @@ export function MomentForm({ moment }: MomentFormProps) {
           title: t('successTitle'),
           description: t('successDescription'),
         })
-        router.refresh()
-        form.reset()
+        router.push('/moments')
       }
     } catch (error) {
       toast({
