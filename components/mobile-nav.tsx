@@ -12,17 +12,36 @@ export function MobileNav() {
   const pathname = usePathname()
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // Kiểm tra xem có phải thiết bị di động không
+    const checkIfMobile = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+      }
+    }
+    
+    checkIfMobile()
+    
     const controlNavbar = () => {
       if (typeof window !== "undefined") {
-        // Hiện nav khi scroll lên (scrollY giảm)
-        // Ẩn nav khi scroll xuống (scrollY tăng)
-        if (window.scrollY > lastScrollY) {
-          setIsVisible(false)
+        if (isMobile) {
+          // Logic ngược cho thiết bị di động (vì đã phát hiện bị ngược)
+          if (window.scrollY > lastScrollY) {
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
+          }
         } else {
-          setIsVisible(true)
+          // Logic cho máy tính giữ nguyên
+          if (window.scrollY > lastScrollY) {
+            setIsVisible(false)
+          } else {
+            setIsVisible(true)
+          }
         }
+        
         setLastScrollY(window.scrollY)
       }
     }
@@ -34,7 +53,7 @@ export function MobileNav() {
         window.removeEventListener("scroll", controlNavbar)
       }
     }
-  }, [lastScrollY])
+  }, [lastScrollY, isMobile])
 
   const items = [
     {
