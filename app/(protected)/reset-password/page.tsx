@@ -1,7 +1,7 @@
 import { resetPasswordAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { getTranslations } from 'next-intl/server';
 
@@ -22,15 +22,13 @@ export default async function ResetPassword(props: {
         </div>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="password">{t('newPassword')}</Label>
-          <Input
-            type="password"
+          <PasswordInput
             name="password"
             placeholder={t('newPasswordPlaceholder')}
             required
           />
           <Label htmlFor="confirmPassword">{t('confirmPassword')}</Label>
-          <Input
-            type="password"
+          <PasswordInput
             name="confirmPassword"
             placeholder={t('confirmPasswordPlaceholder')}
             required

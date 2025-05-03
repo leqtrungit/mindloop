@@ -2,6 +2,7 @@ import { signInAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
@@ -33,8 +34,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                 {t('forgotPassword')}
               </Link>
             </div>
-            <Input
-              type="password"
+            <PasswordInput
               name="password"
               placeholder={t('passwordPlaceholder')}
               required
