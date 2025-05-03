@@ -8,14 +8,13 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 interface EditMomentPageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export default async function EditMomentPage({ params }: EditMomentPageProps) {
+  const resolvedParams = await params;
   const formT = await getTranslations('form')
-  const { id } = params
+  const { id } = resolvedParams
   const supabase = await createClient()
 
   const { data: moment, error } = await supabase
