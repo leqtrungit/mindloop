@@ -241,3 +241,19 @@ export const updateMoment = async (id: string, formData: FormData) => {
 
   return data as Moment;
 };
+
+export const deleteMoment = async (id: string) => {
+  const supabase = await createClient();
+  
+  const { error } = await supabase
+    .from("moments")
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error("Supabase error:", error);
+    throw new Error(error.message);
+  }
+
+  return { success: true };
+};
