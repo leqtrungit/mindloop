@@ -3,7 +3,7 @@
 import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { type Moment, type MomentInsert, ImpactLevel } from "@/utils/supabase/supabase";
+import { type Moment, type MomentInsert, type MomentUpdate, ImpactLevel } from "@/utils/supabase/supabase";
 import { isValidImpactLevel, isValidMomentType, isValidSourceType, isValidTimeOfDay } from "@/lib/types";
 
 export const signUpAction = async (formData: FormData) => {
@@ -176,6 +176,61 @@ export const createMoment = async (formData: FormData) => {
   const { data, error } = await supabase
     .from("moments")
     .insert([momentData])
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Supabase error:", error);
+    throw new Error(error.message);
+  }
+
+  return data as Moment;
+};
+
+export const updateMoment = async (id: string, formData: FormData) => {
+  const supabase = await createClient();
+  
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string | null;
+  const type = formData.get("type") as string;
+  const tags = formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || null;
+  const impactValue = formData.get("impact") as string;
+  const source = formData.get("source") as string | null;
+  const time_of_day = formData.get("time_of_day") as string | null;
+  
+  // Validate inputs
+  if (!isValidMomentType(type)) {
+    throw new Error("Invalid moment type");
+  }
+  
+  if (!isValidImpactLevel(impactValue)) {
+    throw new Error("Invalid impact level");
+  }
+  
+  const impact = impactValue as ImpactLevel;
+  
+  if (source && !isValidSourceType(source)) {
+    throw new Error("Invalid source type");
+  }
+  
+  if (time_of_day && !isValidTimeOfDay(time_of_day)) {
+    throw new Error("Invalid time of day");
+  }
+  
+  const momentData: MomentUpdate = {
+    title,
+    description,
+    type,
+    tags,
+    impact,
+    source,
+    time_of_day
+  };
+
+  const { data, error } = await supabase
+    .from("moments")
+    .update(momentData)
+    .eq('id', id)
     .select()
     .single();
 

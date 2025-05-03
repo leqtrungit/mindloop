@@ -7,9 +7,11 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
-import { Clock, Book, MessageSquare, Newspaper, Brain, Link, Tag, GraduationCap, Hammer, RefreshCw, Users, LucideIcon } from "lucide-react"
+import { Clock, Book, MessageSquare, Newspaper, Brain, Link as LinkIcon, Tag, GraduationCap, Hammer, RefreshCw, Users, LucideIcon, Edit } from "lucide-react"
 import { type Moment } from "@/utils/supabase/supabase"
 import { MomentType, SourceType, isValidMomentType, isValidSourceType } from "@/lib/types"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 interface MomentCardProps {
   moment: Moment
@@ -18,6 +20,7 @@ interface MomentCardProps {
 export const MomentCard = ({ moment }: MomentCardProps) => {
   const locale = useLocale()
   const t = useTranslations('form')
+  const momentT = useTranslations('moments')
   const dateFnsLocale = locale === "vi" ? vi : enUS
   
   const impactColors = {
@@ -31,7 +34,7 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
     conversation: MessageSquare,
     article: Newspaper,
     thinking: Brain,
-    other: Link
+    other: LinkIcon
   }
 
   const typeIcons: Record<MomentType, LucideIcon> = {
@@ -67,16 +70,29 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
             {moment.impact}
           </Badge>
         </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Tooltip>
-            <TooltipTrigger>
-              <Clock className="h-4 w-4" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{moment.time_of_day || "Không xác định"}</p>
-            </TooltipContent>
-          </Tooltip>
-          <span>{formatDistanceToNow(new Date(moment.created_at), { addSuffix: true, locale: dateFnsLocale })}</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Tooltip>
+              <TooltipTrigger>
+                <Clock className="h-4 w-4" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{moment.time_of_day || "Không xác định"}</p>
+              </TooltipContent>
+            </Tooltip>
+            <span>{formatDistanceToNow(new Date(moment.created_at), { addSuffix: true, locale: dateFnsLocale })}</span>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            asChild 
+            className="md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+          >
+            <Link href={`/moments/edit/${moment.id}`}>
+              <Edit className="h-4 w-4 mr-1" />
+              <span>{momentT('editButton')}</span>
+            </Link>
+          </Button>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">

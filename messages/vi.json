@@ -5,6 +5,7 @@
     "titlePlaceholder": "Bạn vừa nghĩ ra điều gì?",
     "descriptionPlaceholder": "Ghi chú thêm về suy nghĩ của bạn...",
     "submit": "Lưu",
+    "update": "Cập nhật",
     "submitting": "Đang lưu...",
     "cancel": "Hủy",
     "success": "Đã lưu thành công!",
@@ -44,6 +45,8 @@
     "notes": "Ghi chú thêm",
     "successTitle": "Thành công",
     "successDescription": "Đã lưu moment thành công",
+    "updateSuccessTitle": "Cập nhật thành công",
+    "updateSuccessDescription": "Đã cập nhật moment thành công",
     "errorTitle": "Lỗi",
     "errorDescription": "Có lỗi xảy ra, vui lòng thử lại"
   },
@@ -143,10 +146,16 @@
     "title": "Đọc Moments",
     "description": "Xem lại và phản tư về các khoảnh khắc của bạn",
     "createButton": "Tạo moment",
+    "editButton": "Sửa",
     "emptyState": "Bạn chưa có moment nào. Hãy tạo moment đầu tiên của bạn!",
     "error": {
       "title": "Đã có lỗi xảy ra",
       "description": "Không thể tải danh sách moments. Vui lòng thử lại sau."
+    },
+    "notFound": {
+      "title": "Không tìm thấy moment",
+      "description": "Moment bạn đang tìm không tồn tại hoặc đã bị xóa",
+      "backButton": "Quay lại danh sách"
     }
   }
 } 

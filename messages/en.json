@@ -5,6 +5,7 @@
     "titlePlaceholder": "What just came to your mind?",
     "descriptionPlaceholder": "Add more notes about your thoughts...",
     "submit": "Save",
+    "update": "Update",
     "submitting": "Saving...",
     "cancel": "Cancel",
     "success": "Saved successfully!",
@@ -41,9 +42,11 @@
       "afternoon": "Afternoon",
       "evening": "Evening"
     },
-    "notes": "Additional Notes",
+    "notes": "Additional notes",
     "successTitle": "Success",
     "successDescription": "Moment saved successfully",
+    "updateSuccessTitle": "Update Success",
+    "updateSuccessDescription": "Moment updated successfully",
     "errorTitle": "Error",
     "errorDescription": "An error occurred, please try again"
   },
@@ -143,10 +146,16 @@
     "title": "Read Moments",
     "description": "Review and reflect on your moments",
     "createButton": "Create moment",
+    "editButton": "Edit",
     "emptyState": "You don't have any moments yet. Create your first one!",
     "error": {
       "title": "An error occurred",
       "description": "Could not load moments. Please try again later."
+    },
+    "notFound": {
+      "title": "Moment not found",
+      "description": "The moment you're looking for doesn't exist or has been deleted",
+      "backButton": "Back to list"
     }
   }
 } 
