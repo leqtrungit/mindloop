@@ -133,49 +133,29 @@ export const signOutAction = async () => {
   return redirect("/");
 };
 
-export const createMoment = async (formData: FormData) => {
+export const createMoment = async (data: MomentInsert) => {
   const supabase = await createClient();
   
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string | null;
-  const type = formData.get("type") as string;
-  const tags = formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || null;
-  const impactValue = formData.get("impact") as string;
-  const source = formData.get("source") as string | null;
-  const time_of_day = formData.get("time_of_day") as string | null;
-  
   // Validate inputs
-  if (!isValidMomentType(type)) {
+  if (!data.type || !isValidMomentType(data.type)) {
     throw new Error("Invalid moment type");
   }
   
-  if (!isValidImpactLevel(impactValue)) {
+  if (!data.impact || !isValidImpactLevel(data.impact)) {
     throw new Error("Invalid impact level");
   }
   
-  const impact = impactValue as ImpactLevel;
-  
-  if (source && !isValidSourceType(source)) {
+  if (data.source && !isValidSourceType(data.source)) {
     throw new Error("Invalid source type");
   }
   
-  if (time_of_day && !isValidTimeOfDay(time_of_day)) {
+  if (data.time_of_day && !isValidTimeOfDay(data.time_of_day)) {
     throw new Error("Invalid time of day");
   }
-  
-  const momentData: MomentInsert = {
-    title,
-    description,
-    type,
-    tags,
-    impact,
-    source,
-    time_of_day
-  };
 
-  const { data, error } = await supabase
+  const { data: momentData, error } = await supabase
     .from("moments")
-    .insert([momentData])
+    .insert([data])
     .select()
     .single();
 
@@ -184,52 +164,32 @@ export const createMoment = async (formData: FormData) => {
     throw new Error(error.message);
   }
 
-  return data as Moment;
+  return momentData as Moment;
 };
 
-export const updateMoment = async (id: string, formData: FormData) => {
+export const updateMoment = async (id: string, data: MomentUpdate) => {
   const supabase = await createClient();
   
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string | null;
-  const type = formData.get("type") as string;
-  const tags = formData.get("tags")?.toString().split(",").map(tag => tag.trim()) || null;
-  const impactValue = formData.get("impact") as string;
-  const source = formData.get("source") as string | null;
-  const time_of_day = formData.get("time_of_day") as string | null;
-  
   // Validate inputs
-  if (!isValidMomentType(type)) {
+  if (data.type && !isValidMomentType(data.type)) {
     throw new Error("Invalid moment type");
   }
   
-  if (!isValidImpactLevel(impactValue)) {
+  if (data.impact && !isValidImpactLevel(data.impact)) {
     throw new Error("Invalid impact level");
   }
   
-  const impact = impactValue as ImpactLevel;
-  
-  if (source && !isValidSourceType(source)) {
+  if (data.source && !isValidSourceType(data.source)) {
     throw new Error("Invalid source type");
   }
   
-  if (time_of_day && !isValidTimeOfDay(time_of_day)) {
+  if (data.time_of_day && !isValidTimeOfDay(data.time_of_day)) {
     throw new Error("Invalid time of day");
   }
-  
-  const momentData: MomentUpdate = {
-    title,
-    description,
-    type,
-    tags,
-    impact,
-    source,
-    time_of_day
-  };
 
-  const { data, error } = await supabase
+  const { data: momentData, error } = await supabase
     .from("moments")
-    .update(momentData)
+    .update(data)
     .eq('id', id)
     .select()
     .single();
@@ -239,7 +199,7 @@ export const updateMoment = async (id: string, formData: FormData) => {
     throw new Error(error.message);
   }
 
-  return data as Moment;
+  return momentData as Moment;
 };
 
 export const deleteMoment = async (id: string) => {

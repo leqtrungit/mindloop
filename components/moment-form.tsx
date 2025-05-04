@@ -47,10 +47,13 @@ export function MomentForm({ moment }: MomentFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: 'learned',
-      source: 'thinking',
-      time_of_day: getTimeOfDay(),
-      impact: 'MEDIUM'
+      title: moment?.title || '',
+      description: moment?.description || undefined,
+      type: (moment?.type as MomentType) || 'learned',
+      tags: moment?.tags || undefined,
+      impact: moment?.impact || 'MEDIUM',
+      source: (moment?.source as SourceType) || 'thinking',
+      time_of_day: (moment?.time_of_day as TimeOfDay) || getTimeOfDay()
     }
   })
 
@@ -78,24 +81,15 @@ export function MomentForm({ moment }: MomentFormProps) {
   const onSubmit = async (data: FormData) => {
     try {
       setIsLoading(true)
-      const formData = new FormData()
-      Object.entries(data).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          formData.append(key, value.join(','))
-        } else {
-          formData.append(key, value)
-        }
-      })
-
       if (isEditing && moment) {
-        await updateMoment(moment.id, formData)
+        await updateMoment(moment.id, data)
         toast({
           title: t('updateSuccessTitle'),
           description: t('updateSuccessDescription'),
         })
         router.push('/moments')
       } else {
-        await createMoment(formData)
+        await createMoment(data)
         toast({
           title: t('successTitle'),
           description: t('successDescription'),
@@ -137,10 +131,9 @@ export function MomentForm({ moment }: MomentFormProps) {
       <div className="space-y-2">
         <Label>{t('type')}</Label>
         <RadioGroup
-          defaultValue={moment?.type || "learned"}
-          className="grid grid-cols-2 gap-2"
-          onValueChange={(value: string) => form.setValue('type', value as MomentType)}
           value={form.watch('type')}
+          onValueChange={(value: string) => form.setValue('type', value as MomentType)}
+          className="grid grid-cols-2 gap-2"
         >
           {Object.entries(t.raw('types') as Record<string, string>).map(([value, label]) => (
             <div key={value} className="flex items-center space-x-2">
@@ -155,7 +148,7 @@ export function MomentForm({ moment }: MomentFormProps) {
         <Label>{t('impact')}</Label>
         <div className="relative">
           <Slider
-            defaultValue={[getImpactValue(moment?.impact || 'MEDIUM')]}
+            value={[getImpactValue(form.watch('impact'))]}
             min={0}
             max={2}
             step={1}
@@ -180,9 +173,8 @@ export function MomentForm({ moment }: MomentFormProps) {
       <div className="space-y-2">
         <Label htmlFor="source">{t('source')}</Label>
         <Select
-          defaultValue={moment?.source || "thinking"}
-          onValueChange={(value: string) => form.setValue('source', value as SourceType)}
           value={form.watch('source')}
+          onValueChange={(value: string) => form.setValue('source', value as SourceType)}
         >
           <SelectTrigger>
             <SelectValue placeholder={t('sourcePlaceholder')} />
@@ -200,10 +192,9 @@ export function MomentForm({ moment }: MomentFormProps) {
       <div className="space-y-2">
         <Label>{t('timeOfDayLabel')}</Label>
         <RadioGroup
-          defaultValue={moment?.time_of_day || getTimeOfDay()}
-          className="grid grid-cols-3 gap-2"
-          onValueChange={(value: string) => form.setValue('time_of_day', value as TimeOfDay)}
           value={form.watch('time_of_day')}
+          onValueChange={(value: string) => form.setValue('time_of_day', value as TimeOfDay)}
+          className="grid grid-cols-3 gap-2"
         >
           {timeOfDayOptions.map((value) => (
             <div key={value} className="flex items-center space-x-2">
@@ -237,4 +228,4 @@ function getImpactValue(impact: ImpactLevel): number {
     'HIGH': 2
   }
   return impactMap[impact]
-} 
+}
