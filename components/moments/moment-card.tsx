@@ -95,7 +95,7 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
 
   return (
     <>
-      <Card className="group relative h-full transition-all hover:shadow-lg">
+      <Card className="group relative transition-all hover:shadow-lg">
         <CardHeader className="space-y-2 pb-3 sm:pb-4">
           <div className="flex items-center justify-between">
             <CardTitle className="line-clamp-2 text-base sm:text-lg font-semibold">
