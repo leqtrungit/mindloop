@@ -96,14 +96,14 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
   return (
     <>
       <Card className="group relative h-full transition-all hover:shadow-lg">
-        <CardHeader className="space-y-2">
+        <CardHeader className="space-y-2 pb-3 sm:pb-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="line-clamp-2 text-lg font-semibold">
+            <CardTitle className="line-clamp-2 text-base sm:text-lg font-semibold">
               {moment.title}
             </CardTitle>
             <Badge
               className={cn(
-                "ml-2 whitespace-nowrap",
+                "ml-2 whitespace-nowrap text-xs",
                 impactColors[moment.impact]
               )}
             >
@@ -111,64 +111,64 @@ export const MomentCard = ({ moment }: MomentCardProps) => {
             </Badge>
           </div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
               <Tooltip>
                 <TooltipTrigger>
-                  <Clock className="h-4 w-4" />
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>{moment.time_of_day || "Không xác định"}</p>
                 </TooltipContent>
               </Tooltip>
-              <span>{formatDistanceToNow(new Date(moment.created_at), { addSuffix: true, locale: dateFnsLocale })}</span>
+              <span className="line-clamp-1">{formatDistanceToNow(new Date(moment.created_at), { addSuffix: true, locale: dateFnsLocale })}</span>
             </div>
             <div className="flex gap-1">
               <Button 
                 variant="ghost" 
                 size="sm" 
                 asChild 
-                className="md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity h-8 px-2 sm:h-auto sm:px-3"
               >
                 <Link href={`/moments/edit/${moment.id}`}>
-                  <Edit className="h-4 w-4 mr-1" />
-                  <span>{momentT('editButton')}</span>
+                  <Edit className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">{momentT('editButton')}</span>
                 </Link>
               </Button>
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="md:opacity-0 md:group-hover:opacity-100 transition-opacity text-destructive"
+                className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity text-destructive h-8 px-2 sm:h-auto sm:px-3"
                 onClick={() => setShowDeleteDialog(true)}
               >
-                <Trash className="h-4 w-4 mr-1" />
-                <span>{momentT('deleteButton')}</span>
+                <Trash className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-1" />
+                <span className="hidden sm:inline">{momentT('deleteButton')}</span>
               </Button>
             </div>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-3 sm:space-y-4 pt-0">
           <p className="line-clamp-3 text-sm text-muted-foreground">
             {moment.description}
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {moment.tags?.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                <Tag className="mr-1 h-3 w-3" />
+              <Badge key={tag} variant="secondary" className="text-xs">
+                <Tag className="mr-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 {tag}
               </Badge>
             ))}
           </div>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
             {SourceIcon && moment.source && isValidSourceType(moment.source) && (
               <div className="flex items-center gap-1">
-                <SourceIcon className="h-3 w-3" />
-                <span>{(t.raw('sources') as Record<string, string>)[moment.source]}</span>
+                <SourceIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                <span className="truncate">{(t.raw('sources') as Record<string, string>)[moment.source]}</span>
               </div>
             )}
             {TypeIcon && moment.type && isValidMomentType(moment.type) && (
               <div className="flex items-center gap-1">
-                <TypeIcon className="h-3 w-3" />
-                <span>{(t.raw('types') as Record<string, string>)[moment.type]}</span>
+                <TypeIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                <span className="truncate">{(t.raw('types') as Record<string, string>)[moment.type]}</span>
               </div>
             )}
           </div>

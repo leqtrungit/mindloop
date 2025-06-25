@@ -165,6 +165,9 @@
       "title": "Không tìm thấy moment",
       "description": "Moment bạn đang tìm không tồn tại hoặc đã bị xóa",
       "backButton": "Quay lại danh sách"
-    }
+    },
+    "searchPlaceholder": "Tìm kiếm theo tiêu đề, mô tả hoặc tags...",
+    "noSearchResults": "Không tìm thấy moment nào phù hợp với từ khóa tìm kiếm.",
+    "searchResults": "Kết quả tìm kiếm cho"
   }
 } 

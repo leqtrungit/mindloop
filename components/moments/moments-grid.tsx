@@ -15,7 +15,7 @@ export const MomentsGrid = ({ moments }: MomentsGridProps) => {
   return (
     <div
       className={cn(
-        "grid gap-4",
+        "grid gap-3 sm:gap-4",
         isDesktop
           ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           : "grid-cols-1"
@@ -26,7 +26,7 @@ export const MomentsGrid = ({ moments }: MomentsGridProps) => {
           key={moment.id}
           className={cn(
             "break-inside-avoid",
-            isDesktop && "mb-4"
+            isDesktop && "mb-2"
           )}
         >
           <MomentCard moment={moment} />

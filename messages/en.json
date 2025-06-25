@@ -165,6 +165,9 @@
       "title": "Moment not found",
       "description": "The moment you're looking for doesn't exist or has been deleted",
       "backButton": "Back to list"
-    }
+    },
+    "searchPlaceholder": "Search by title, description or tags...",
+    "noSearchResults": "No moments found matching your search criteria.",
+    "searchResults": "Search results for"
   }
 } 
